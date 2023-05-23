@@ -1,0 +1,32 @@
+{
+  "name": "art-image-bucket",
+  "version": "1.0.0",
+  "description": "For use with regular webhost that can run node.js but provides similar interface to S3 so later transition will be smooth. Mainly provides an authenticated way for the uploading and deleting of images.",
+  "main": "art-image-bucket.js",
+  "scripts": {
+    "test": "\"echo \\\"Error: no test specified\\\" && exit 1\"",
+    "start": "node art-image-bucket",
+    "generate-key": "node ./utilities/generate-key",
+    "dev": "nodemon portlandredbird-backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CzerPDX/art-image-bucket.git"
+  },
+  "author": "Brooke Czerwinski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CzerPDX/art-image-bucket/issues"
+  },
+  "homepage": "https://github.com/CzerPDX/art-image-bucket#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "multer": "^1.4.5-lts.1",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
