@@ -41,6 +41,4 @@ jobs:
         key: ${{ secrets.A2HOSTING_PRIVATE_KEY }}
         passphrase: ${{ secrets.A2HOSTING_PRIVATE_KEY_PASSPHRASE }}
         source: "./"
-        # # strip_components set to 1 stops a "build" folder from being created at the destination https://github.com/appleboy/scp-action/issues/59#issuecomment-964605479
-        # strip_components: 1
-        target: ${{ secrets.SFTP_ART_DESTINATION_PATH_DEV }}
+        target: ${{ secrets.SFTP_IMG_DESTINATION_PATH_DEV }}
