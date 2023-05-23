@@ -48,7 +48,7 @@ const validateAPI = (req, res, next) => {
   // If there is no api key or the key doesn't match the expected one, kick them out
   if (!apiKey) {
     return res.status(403).json({message: 'Forbidden: No API key provided.'});
-  } else if (apiKey !== process.env.ART_IMAGE_BUCKET_API_KEY) {
+  } else if (apiKey !== process.env.ART_API_KEY) {
     return res.status(403).json({message: 'Forbidden: invalid API key.'});
   }
 
