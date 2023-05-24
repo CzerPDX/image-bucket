@@ -2,7 +2,6 @@ name: Art Image Bucket Dev Deployment
 
 concurrency: art-image-dev-ev
 
-# These actions happen whenever someone pushes or creates a pull request to the dev branch
 on:
   push:
     branches:
@@ -24,14 +23,9 @@ jobs:
       with:
         node-version: 16.x
 
-    # npm ci is used instead of npm install for the following reasons:
-    # 1. It provides a faster and cleaner installation by removing the existing node_modules folder.
-    # 2. It ensures a consistent and reproducible dependency tree, as it installs the exact dependencies specified in package-lock.json.
-    # 3. It enforces strict adherence between package.json and package-lock.json, ensuring that the dependencies are accurate and up-to-date.
     - name: Install dependencies and build
       run: npm ci
 
-    # Connect to host using SSH key
     - name: Deploy to A2 Hosting
       uses: appleboy/scp-action@v0.1.4
       with:
@@ -41,6 +35,4 @@ jobs:
         key: ${{ secrets.A2HOSTING_PRIVATE_KEY }}
         passphrase: ${{ secrets.A2HOSTING_PRIVATE_KEY_PASSPHRASE }}
         source: "./"
-        # # strip_components set to 1 stops a "build" folder from being created at the destination https://github.com/appleboy/scp-action/issues/59#issuecomment-964605479
-        # strip_components: 1
-        target: ${{ secrets.SFTP_ART_DESTINATION_PATH_DEV }}
+        target: ${{ secrets.SFTP_IMG_DESTINATION_PATH_DEV }}

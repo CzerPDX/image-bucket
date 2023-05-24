@@ -47,9 +47,9 @@ const validateAPI = (req, res, next) => {
   const apiKey = req.headers['x-api-key'];
   // If there is no api key or the key doesn't match the expected one, kick them out
   if (!apiKey) {
-    return res.status(403).json({message: 'Forbidden: No API key provided.'});
+    return res.status(403).json({message: 'Forbidden: No bucket API key provided.'});
   } else if (apiKey !== process.env.ART_API_KEY) {
-    return res.status(403).json({message: 'Forbidden: invalid API key.'});
+    return res.status(403).json({message: 'Forbidden: invalid bucket API key.'});
   }
 
   next();
