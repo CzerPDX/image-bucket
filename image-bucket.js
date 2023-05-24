@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const { validateAPI } = require('./utilities/security');
+const { validateAPI, apiLimiter } = require('./utilities/security');
 
 require('dotenv').config();
 
@@ -10,6 +10,8 @@ const port = process.env.ENVIRONMENT === 'production' ? null : process.env.IMAGE
 
 //  Validate request's api key before proceeding
 app.use(validateAPI);
+
+app.use(apiLimiter);
 
 
 // Art Upload Routes
