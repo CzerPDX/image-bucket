@@ -130,5 +130,4 @@ dist
 .pnp.*
 
 
-# Disregard images in img folder
-img/*
+# Disregard images in bucket folder
