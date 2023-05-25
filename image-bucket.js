@@ -16,7 +16,7 @@ app.use(apiLimiter);
 
 // Art Upload Routes
 const uploadRoutes = require('./routes/upload');
-app.put('/', uploadRoutes);
+app.put('/*', uploadRoutes);
 
 // Start the server
 app.listen(port, () => {
