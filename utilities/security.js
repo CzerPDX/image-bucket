@@ -1,9 +1,9 @@
 const rateLimit = require('express-rate-limit');
 
+// Add allowed filetypes here
 const JPG_TYPE = 'image/jpeg';
 const PNG_TYPE = 'image/png';
 const GIF_TYPE = 'image/gif';
-
 const ALLOWED_FILETYPES = [JPG_TYPE, PNG_TYPE, GIF_TYPE];
 
 // Checks the file type based on the first 4 bytes of the file
@@ -40,7 +40,6 @@ const checkFileType = (buffer) => {
 // Returns true or false based on whether the filetype is allowed
 const validateFileType = (incomingFile) => {
   const fileType = checkFileType(incomingFile);
-  console.log(`fileType = ${fileType}`);
   return ALLOWED_FILETYPES.includes(fileType);
 };
 
