@@ -1,7 +1,6 @@
 const multer  = require('multer');
 const express = require('express');
 const router = express.Router();
-var crypto = require('crypto');
 const fs = require('fs');
 
 const { validateFileType } = require('../utilities/security');
@@ -75,7 +74,6 @@ router.put('/:bucketName', async (req, res) => {
   const fileUrl = `${process.env.IMAGE_BUCKET_URL}/${bucketName}/${filename}`;
 
   const response = {
-    ETag: '"' + crypto.createHash('md5').update(fs.readFileSync(req.file.path)).digest('hex') + '"',
     Location: fileUrl,
     key: filename,
     Bucket: bucketName
