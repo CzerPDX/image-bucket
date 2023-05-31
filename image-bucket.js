@@ -14,9 +14,14 @@ app.use(validateAPI);
 app.use(apiLimiter);
 
 
-// Art Upload Routes
+// Upload Routes
 const uploadRoutes = require('./routes/upload');
 app.put('/*', uploadRoutes);
+
+
+// Delete Routes
+const deleteRoutes = require('./routes/delete');
+app.delete('/*', deleteRoutes);
 
 // Start the server
 app.listen(port, () => {
