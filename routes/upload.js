@@ -71,7 +71,7 @@ router.put('/:bucketName', async (req, res) => {
 
   // Send a success response
   const filename = req.file.originalname;
-  const fileUrl = `${process.env.IMAGE_BUCKET_URL}/${bucketName}/${filename}`;
+  const fileUrl = `${process.env.FILE_BUCKET_URL}/${bucketName}/${filename}`;
 
   const response = {
     Location: fileUrl,
