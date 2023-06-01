@@ -4,8 +4,6 @@ const { validateAPI, apiLimiter } = require('./utilities/security');
 
 require('dotenv').config();
 
-console.log('request received');
-
 // Figure out the port
 // In live environment the NODE_ENV will be set to "production"
 const port = process.env.ENVIRONMENT === 'production' ? null : process.env.FILE_BUCKET_PORT;
@@ -14,6 +12,13 @@ const port = process.env.ENVIRONMENT === 'production' ? null : process.env.FILE_
 app.use(validateAPI);
 
 app.use(apiLimiter);
+
+// Debugging live environment
+app.all('*', (req, res, next) => {
+  console.log(`${new Date().toString()}: Received ${req.method} request on ${req.path}`);
+  next();
+});
+
 
 
 // Upload Routes
