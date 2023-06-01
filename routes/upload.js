@@ -45,16 +45,7 @@ router.put('/:bucketName', async (req, res) => {
     });
   }
 
-  // If no file was sent in the request, return an error
-  if (!req.file) {
-    return res.status(400).send({
-      Error: {
-        Code: 'NoFileUploaded',
-        Message: 'No file was sent to the bucket.',
-      }
-    });
-  }
-
+  
   const upload = multer({ storage: setStorage(bucketName) }).single('file');
   try {
     await uploadAsync(req, res, upload);
@@ -66,6 +57,17 @@ router.put('/:bucketName', async (req, res) => {
       },
     });
   }
+
+  // If no file was sent in the request, return an error
+  if (!req.file) {
+    return res.status(400).send({
+      Error: {
+        Code: 'NoFileUploaded',
+        Message: 'No file was sent to the bucket.',
+      }
+    });
+  }
+
 
   const fileBuffer = fs.readFileSync(req.file.path);
 
