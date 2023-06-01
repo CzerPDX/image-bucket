@@ -6,7 +6,7 @@ require('dotenv').config();
 
 // Figure out the port
 // In live environment the NODE_ENV will be set to "production"
-const port = process.env.ENVIRONMENT === 'production' ? null : process.env.IMAGE_BUCKET_PORT;
+const port = process.env.ENVIRONMENT === 'production' ? null : process.env.FILE_BUCKET_PORT;
 
 //  Validate request's api key before proceeding
 app.use(validateAPI);
@@ -14,9 +14,14 @@ app.use(validateAPI);
 app.use(apiLimiter);
 
 
-// Art Upload Routes
+// Upload Routes
 const uploadRoutes = require('./routes/upload');
 app.put('/*', uploadRoutes);
+
+
+// Delete Routes
+const deleteRoutes = require('./routes/delete');
+app.delete('/*', deleteRoutes);
 
 // Start the server
 app.listen(port, () => {
