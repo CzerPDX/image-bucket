@@ -4,6 +4,7 @@ const fs = require('fs');
 
 router.delete('/:bucketName/:filename', async (req, res) => {
   try {
+    console.log('reached delete of bucket and filename');
 
     const bucketName = req.params.bucketName;
     const filepath = `${req.params.bucketName}/${req.params.filename}`;
