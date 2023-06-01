@@ -26,13 +26,15 @@ router.delete('/:bucketName/:filename', async (req, res) => {
     });
   }
 
-  // If the file doesn't exist we return success
+  // If the file doesn't exist return success
   if (!fs.existsSync(filepath)) {
+    console.log('file does not exist on the server');
     return res.status(204).end();
   }
 
   // Delete the file from the server
   try {
+    console.log('deleting file from server');
     fs.unlinkSync(filepath);
     return res.status(204).end();
   } catch (error) {
