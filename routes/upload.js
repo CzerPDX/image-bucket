@@ -45,22 +45,34 @@ router.put('/:bucketName', async (req, res) => {
     });
   }
 
-  const upload = multer({ storage: setStorage(bucketName) }).single('file');
-  await uploadAsync(req, res, upload);
-
-  // If no file was uploaded, return an error
+  // If no file was sent in the request, return an error
   if (!req.file) {
     return res.status(400).send({
       Error: {
         Code: 'NoFileUploaded',
-        Message: 'No file was uploaded to the bucket.',
+        Message: 'No file was sent to the bucket.',
       }
+    });
+  }
+
+  const upload = multer({ storage: setStorage(bucketName) }).single('file');
+  try {
+    await uploadAsync(req, res, upload);
+  } catch (error) {
+    return res.status(500).send({
+      Error: {
+        Code: 'ServerError',
+        Message: 'An error occurred while uploading the file.',
+      },
     });
   }
 
   const fileBuffer = fs.readFileSync(req.file.path);
 
+  // Check if the filetype is valid
   if (!validateFileType(fileBuffer)) {
+    // Delete the file from the server if it is an invalid filetype
+    fs.unlinkSync(req.file.path);
     return res.status(400).send({
       Error: {
         Code: 'AccessDenied',
@@ -68,7 +80,7 @@ router.put('/:bucketName', async (req, res) => {
       }
     });
   }
-
+  
   // Send a success response
   const filename = req.file.originalname;
   const fileUrl = `${process.env.FILE_BUCKET_URL}/${bucketName}/${filename}`;
