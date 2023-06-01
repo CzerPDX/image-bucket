@@ -4,6 +4,8 @@ const { validateAPI, apiLimiter } = require('./utilities/security');
 
 require('dotenv').config();
 
+console.log('request received');
+
 // Figure out the port
 // In live environment the NODE_ENV will be set to "production"
 const port = process.env.ENVIRONMENT === 'production' ? null : process.env.FILE_BUCKET_PORT;
