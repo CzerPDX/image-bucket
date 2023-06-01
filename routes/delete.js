@@ -3,9 +3,9 @@ const router = express.Router();
 const fs = require('fs');
 
 
-router.delete('/:bucketName/:filename', async (req, res) => {
+router.delete('/delete/:bucketName/:filename', async (req, res) => {
   try {
-    console.log('reached delete of bucket and filename');
+    console.log('reached delete');
 
     const bucketName = req.params.bucketName;
     const filepath = `${req.params.bucketName}/${req.params.filename}`;
@@ -47,7 +47,7 @@ router.delete('/:bucketName/:filename', async (req, res) => {
     return res.status(204).end();
   } catch (error) {
 
-    // Log the error for debugging purposes
+    // If something unexpected goes wrong
     console.error(error);
     return res.status(500).send({
       Error: {

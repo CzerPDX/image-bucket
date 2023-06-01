@@ -13,7 +13,7 @@ app.use(validateAPI);
 
 app.use(apiLimiter);
 
-// Debugging live environment
+// Log all requests
 app.all('*', (req, res, next) => {
   console.log(`${new Date().toString()}: Received ${req.method} request on ${req.path}`);
   next();
@@ -28,7 +28,7 @@ app.put('/*', uploadRoutes);
 
 // Delete Routes
 const deleteRoutes = require('./routes/delete');
-app.delete('/*', deleteRoutes);
+app.delete('/delete/*', deleteRoutes);
 
 // Start the server
 app.listen(port, () => {

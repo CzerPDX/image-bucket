@@ -45,7 +45,7 @@ router.put('/:bucketName', async (req, res) => {
     });
   }
 
-  
+  // Multer must take the file in using "upload" before it can be checked below
   const upload = multer({ storage: setStorage(bucketName) }).single('file');
   try {
     await uploadAsync(req, res, upload);
