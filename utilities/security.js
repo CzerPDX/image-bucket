@@ -45,7 +45,6 @@ const validateFileType = (incomingFile) => {
 
 //  Validate request's api key before proceeding
 const validateAPI = (req, res, next) => {
-  console.log('validating api key');
   const apiKey = req.headers['x-api-key'];
   // If there is no api key or the key doesn't match the expected one, kick them out
   if (!apiKey) {
