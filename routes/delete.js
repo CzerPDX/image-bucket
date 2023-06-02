@@ -35,7 +35,7 @@ router.delete('/:bucketName/:filename', async (req, res) => {
 
     // If the file doesn't exist return success (it's already gone!)
     if (!fs.existsSync(filepath)) {
-      console.error(`Success: ${filepath} does not exist on the server. No need to delete.`);
+      console.log(`Success: ${filepath} does not exist on the server. No need to delete.`);
       return res.status(204).end();
     }
 
