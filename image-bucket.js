@@ -28,7 +28,7 @@ app.put('/*', uploadRoutes);
 
 // Delete Routes
 const deleteRoutes = require('./routes/delete');
-app.delete('/delete/*', deleteRoutes);
+app.delete('/*', deleteRoutes);
 
 // Start the server
 app.listen(port, () => {
