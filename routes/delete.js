@@ -3,7 +3,7 @@ const router = express.Router();
 const fs = require('fs');
 
 
-router.delete('/:bucketName/:filename', async (req, res) => {
+router.delete('/delete/:bucketName/:filename', async (req, res) => {
   try {
 
     const bucketName = req.params.bucketName;
