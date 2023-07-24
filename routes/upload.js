@@ -35,25 +35,29 @@ router.put('/:bucketName', async (req, res) => {
   const bucketName = req.params.bucketName;
 
   // Check if the bucket exists
-  if (!fs.existsSync(bucketName)) {
+  if (!fs.existsSync(`buckets/${bucketName}`)) {
+    const errMsg = `The specified bucket does not exist`;
+    console.error(errMsg);
     return res.status(404).send({
       Error: {
         Code: 'NoSuchBucket',
-        Message: 'The specified bucket does not exist',
+        Message: errMsg,
         BucketName: bucketName,
       }
     });
   }
 
   // Multer must take the file in using "upload" before it can be checked below
-  const upload = multer({ storage: setStorage(bucketName) }).single('file');
+  const upload = multer({ storage: setStorage(`buckets/${bucketName}`) }).single('file');
   try {
     await uploadAsync(req, res, upload);
   } catch (error) {
+    const errMsg = `An error occurred while uploading the file.`;
+    console.error(`${errMsg}: ${error.message}`);
     return res.status(500).send({
       Error: {
         Code: 'ServerError',
-        Message: 'An error occurred while uploading the file.',
+        Message: errMsg,
       },
     });
   }
