@@ -8,10 +8,15 @@ require('dotenv').config();
 // In live environment the NODE_ENV will be set to "production"
 const port = process.env.ENVIRONMENT === 'production' ? null : process.env.FILE_BUCKET_PORT;
 
+// Statically serve contents of buckets
+app.use(express.static('buckets'));
+
 //  Validate request's api key before proceeding
 app.use(validateAPI);
 
 app.use(apiLimiter);
+
+
 
 // Log all requests
 app.all('*', (req, res, next) => {
