@@ -11,6 +11,12 @@ const port = process.env.ENVIRONMENT === 'production' ? null : process.env.FILE_
 // Statically serve contents of buckets
 app.use(express.static('buckets'));
 
+
+app.use((req, res, next) => {
+  console.log(`Static file not found for ${req.method} request on ${req.path}`);
+  next();
+});
+
 //  Validate request's api key before proceeding
 app.use(validateAPI);
 

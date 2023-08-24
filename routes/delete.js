@@ -8,7 +8,7 @@ router.delete('/:bucketName/:filename', async (req, res) => {
     console.log(req.params.bucketName);
 
     const bucketName = req.params.bucketName;
-    const filepath = `${req.params.bucketName}/${req.params.filename}`;
+    const filepath = `buckets/${req.params.bucketName}/${req.params.filename}`;
 
     // If the bucket doesn't exist or wasn't included in the request parameters
     if (!fs.existsSync(`buckets/${bucketName}`) || !req.params.bucketName) {
