@@ -11,6 +11,12 @@ const port = process.env.ENVIRONMENT === 'production' ? null : process.env.FILE_
 // Statically serve contents of buckets
 app.use(express.static('buckets'));
 
+
+app.use((req, res, next) => {
+  console.log(`Static file not found for ${req.method} request on ${req.path}`);
+  next();
+});
+
 //  Validate request's api key before proceeding
 app.use(validateAPI);
 
@@ -33,7 +39,7 @@ app.put('/*', uploadRoutes);
 
 // Delete Routes
 const deleteRoutes = require('./routes/delete');
-app.delete('/delete/*', deleteRoutes);
+app.delete('/*', deleteRoutes);
 
 // Start the server
 app.listen(port, () => {

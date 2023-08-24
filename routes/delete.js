@@ -3,14 +3,15 @@ const router = express.Router();
 const fs = require('fs');
 
 
-router.delete('/delete/:bucketName/:filename', async (req, res) => {
+router.delete('/:bucketName/:filename', async (req, res) => {
   try {
+    console.log(req.params.bucketName);
 
     const bucketName = req.params.bucketName;
-    const filepath = `${req.params.bucketName}/${req.params.filename}`;
+    const filepath = `buckets/${req.params.bucketName}/${req.params.filename}`;
 
     // If the bucket doesn't exist or wasn't included in the request parameters
-    if (!fs.existsSync(bucketName) || !req.params.bucketName) {
+    if (!fs.existsSync(`buckets/${bucketName}`) || !req.params.bucketName) {
       console.error('Bucket name was invalid or not provided');
       return res.status(404).send({
         Error: {
