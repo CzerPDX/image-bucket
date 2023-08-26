@@ -131,4 +131,4 @@ dist
 
 
 # Disregard images in bucket folders
-buckets/*
+buckets/art/*
